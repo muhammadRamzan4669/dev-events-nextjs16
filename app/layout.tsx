@@ -14,6 +14,11 @@ const martianMono = Martian_Mono({
   subsets: ["latin"],
 });
 
+export const metadate: Metadata = {
+  title: "DevEvent",
+  description: "The Hub for Every Dev Event You Mustn't Miss",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
