@@ -188,11 +188,25 @@ function normalizeTime(timeString: string): string {
     const [timePart, period] = cleanTime.split(/\s*(am|pm)\s*/);
     let [hours, minutes] = timePart.split(":").map((num) => parseInt(num, 10));
 
-    if (Number.isNaN(hours) || Number.isNaN(minutes)) {
+    // if (Number.isNaN(hours) || Number.isNaN(minutes)) {
+    //   throw new Error(
+    //     "Invalid time format. Please use HH:MM or HH:MM AM/PM format.",
+    //   );
+    // }
+
+    if (
+      Number.isNaN(hours) ||
+      Number.isNaN(minutes) ||
+      hours < 1 ||
+      hours > 12 ||
+      minutes < 0 ||
+      minutes > 59
+    ) {
       throw new Error(
         "Invalid time format. Please use HH:MM or HH:MM AM/PM format.",
       );
     }
+
 
     // Convert to 24-hour format
     if (period === "pm" && hours !== 12) {

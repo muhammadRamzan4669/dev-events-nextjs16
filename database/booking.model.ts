@@ -79,11 +79,6 @@ BookingSchema.pre<IBooking>('save', async function(next) {
  */
 BookingSchema.index({ eventId: 1, email: 1 });
 
-/**
- * Index on eventId for faster event-specific queries
- * Improves performance when fetching all bookings for an event
- */
-BookingSchema.index({ eventId: 1 });
 
 /**
  * Static method to get all bookings for a specific event
