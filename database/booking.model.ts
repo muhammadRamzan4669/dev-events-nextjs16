@@ -75,9 +75,9 @@ BookingSchema.pre<IBooking>('save', async function(next) {
 
 /**
  * Compound index for optimized queries
- * Allows efficient lookups by event and email combination
+ * Ensures unique bookings and allows efficient lookups by event and email combination
  */
-BookingSchema.index({ eventId: 1, email: 1 });
+BookingSchema.index({ eventId: 1, email: 1 }, { unique: true });
 
 
 /**
