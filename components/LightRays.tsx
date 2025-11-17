@@ -5,6 +5,7 @@ import { Renderer, Program, Triangle, Mesh } from "ogl";
 
 export type RaysOrigin =
   | "top-center"
+  | "top-center-offset"
   | "top-left"
   | "top-right"
   | "right"
@@ -29,7 +30,7 @@ interface LightRaysProps {
   className?: string;
 }
 
-const DEFAULT_COLOR = "#1a1a1a";
+const DEFAULT_COLOR = "#ffffff";
 
 const hexToRgb = (hex: string): [number, number, number] => {
   const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -53,6 +54,8 @@ const getAnchorAndDir = (
       return { anchor: [0, -outside * h], dir: [0, 1] };
     case "top-right":
       return { anchor: [w, -outside * h], dir: [0, 1] };
+    case "top-center-offset":
+      return { anchor: [0.5 * w + 0.2 * w, -outside * h], dir: [-0.2, 1] };
     case "left":
       return { anchor: [-outside * w, 0.5 * h], dir: [1, 0] };
     case "right":
@@ -67,27 +70,6 @@ const getAnchorAndDir = (
       return { anchor: [0.5 * w, -outside * h], dir: [0, 1] };
   }
 };
-
-type Vec2 = [number, number];
-type Vec3 = [number, number, number];
-
-interface Uniforms {
-  iTime: { value: number };
-  iResolution: { value: Vec2 };
-  rayPos: { value: Vec2 };
-  rayDir: { value: Vec2 };
-  raysColor: { value: Vec3 };
-  raysSpeed: { value: number };
-  lightSpread: { value: number };
-  rayLength: { value: number };
-  pulsating: { value: number };
-  fadeDistance: { value: number };
-  saturation: { value: number };
-  mousePos: { value: Vec2 };
-  mouseInfluence: { value: number };
-  noiseAmount: { value: number };
-  distortion: { value: number };
-}
 
 const LightRays: React.FC<LightRaysProps> = ({
   raysOrigin = "top-center",
@@ -105,12 +87,12 @@ const LightRays: React.FC<LightRaysProps> = ({
   className = "",
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const uniformsRef = useRef<Uniforms | null>(null);
+  const uniformsRef = useRef<any>(null);
   const rendererRef = useRef<Renderer | null>(null);
   const mouseRef = useRef({ x: 0.5, y: 0.5 });
   const smoothMouseRef = useRef({ x: 0.5, y: 0.5 });
   const animationIdRef = useRef<number | null>(null);
-  const meshRef = useRef<Mesh | null>(null);
+  const meshRef = useRef<any>(null);
   const cleanupFunctionRef = useRef<(() => void) | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -268,7 +250,7 @@ void main() {
   gl_FragColor  = color;
 }`;
 
-      const uniforms: Uniforms = {
+      const uniforms = {
         iTime: { value: 0 },
         iResolution: { value: [1, 1] },
 
@@ -463,7 +445,7 @@ void main() {
   return (
     <div
       ref={containerRef}
-      className={`w-full h-full pointer-events-none z-[3] overflow-hidden relative ${className}`.trim()}
+      className={`pointer-events-none relative z-[3] h-full w-full overflow-hidden ${className}`.trim()}
     />
   );
 };

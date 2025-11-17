@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Schibsted_Grotesk, Martian_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar.tsx";
-import LightRays from "@/components/LightRays.tsx";
+import Navbar from "./components/Navbar";
+import LightRays from "@/components/LightRays";
 
 const schibstedGrotesk = Schibsted_Grotesk({
   variable: "--font-schibsted-grotesk",
@@ -14,7 +14,7 @@ const martianMono = Martian_Mono({
   subsets: ["latin"],
 });
 
-export const metadate: Metadata = {
+export const metadata: Metadata = {
   title: "DevEvent",
   description: "The Hub for Every Dev Event You Mustn't Miss",
 };
