@@ -52,7 +52,7 @@ body {
   --radius: 0.625rem;
   /* --background: oklch(1 0 0); */
   /* --foreground: oklch(0.145 0 0); */
-  --background: #1a1a1a;
+  --background: #030708;
   --foreground: #ffffff;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
