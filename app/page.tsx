@@ -1,5 +1,6 @@
-import ExploreBtn from "./components/ExploreBtn.tsx";
 import EventCard from "./components/EventCard";
+import ExploreBtn from "./components/ExploreBtn.tsx";
+
 import { events } from "@/lib/constants";
 
 export default function Home() {

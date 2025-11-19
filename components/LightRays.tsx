@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-import { Renderer, Program, Triangle, Mesh } from "ogl";
+import { useEffect, useRef, useState } from "react";
+
+import { Mesh, Program, Renderer, Triangle } from "ogl";
 
 export type RaysOrigin =
   | "top-center"

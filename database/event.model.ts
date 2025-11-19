@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, CallbackError } from "mongoose";
+import mongoose, { CallbackError, Document, Schema } from "mongoose";
 
 /**
  * TypeScript interface for Event document
@@ -207,7 +207,6 @@ function normalizeTime(timeString: string): string {
       );
     }
 
-
     // Convert to 24-hour format
     if (period === "pm" && hours !== 12) {
       hours += 12;
@@ -244,4 +243,3 @@ const Event =
   mongoose.models.Event || mongoose.model<IEvent>("Event", EventSchema);
 
 export default Event;
-

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import { Event } from "@/lib/constants";
 
 export default function EventCard({ event }: { event: Event }) {
